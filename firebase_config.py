@@ -12,8 +12,7 @@ if os.getenv("RUNNING_IN_STREAMLIT_CLOUD"):
     cred = credentials.Certificate(st.secrets["firebase"])
 else:
     # Fallback to a local path if running locally
-    cred = credentials.Certificate("C:/Users/vedan/Downloads/your-firebase-adminsdk.json")
-
+    cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
 # Initialize Firebase Admin SDK
 initialize_app(cred, {'storageBucket': 'your-project-id.appspot.com'})
 
