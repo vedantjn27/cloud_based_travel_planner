@@ -5,10 +5,12 @@ import pyrebase
 import os
 import streamlit as st
 import json
+import os
 
+if os.name == "nt":
+    cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
 # Check if the app is running on Streamlit Cloud
-if "firebase" in st.secrets:
-    cred=credentials.Certificate(st.secrets["firebase"])
+elif "firebase" in st.secrets:
     firebase_config = {
          "type": st.secrets["firebase"]["type"],
          "project_id": st.secrets["firebase"]["project_id"],
