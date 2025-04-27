@@ -191,7 +191,7 @@ def add_trip_form():
             if success:
                 st.success(message)
                 # Generate itinerary for the new trip
-                success, itinerary_message = generate_itinerary(trip_id)
+                success, itinerary_message = generate_itinerary(trip_id) 
                 
                 if success:
                     st.success(itinerary_message)
@@ -851,15 +851,19 @@ def show_trip_details(trip_id):
                     st.success(message)
                     # Clear form fields in session state
                     try:
-                        st.session_state.note_title = ""
+                        if "note_title" not in st.session_state:
+                            st.session_state.note_title = ""
                     except Exception as e:
                         st.error(f"skipping reset {e}")
 
 
-                    st.session_state["note_content"] = ""
-                    st.session_state["note_location"] = ""
-                    st.session_state["note_mood"] = ""
-                    st.rerun()
+                    if "note_content" not in st.session_state:
+                        st.session_state["note_content"] = ""
+                    if "note_location" not in st.session_state:
+                        st.session_state["note_location"] = ""
+                    if "note_mood" not in st.session_state:
+                        st.session_state["note_mood"] = ""
+                        st.rerun()
 
                 else:
                     st.error(message)
