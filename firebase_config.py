@@ -7,7 +7,7 @@ import streamlit as st
 import json
 
 # Check if the app is running on Streamlit Cloud
-if os.getenv("RUNNING_IN_STREAMLIT_CLOUD"):
+if "firebase" in st.secrets:
     cred=credentials.Certificate(st.secrets["firebase"])
 else:
     cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
