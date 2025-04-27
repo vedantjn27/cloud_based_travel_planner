@@ -9,6 +9,19 @@ import json
 # Check if the app is running on Streamlit Cloud
 if "firebase" in st.secrets:
     cred=credentials.Certificate(st.secrets["firebase"])
+    firebase_config = {
+         "type": st.secrets["firebase"]["type"],
+         "project_id": st.secrets["firebase"]["project_id"],
+         "private_key_id": st.secrets["firebase"]["private_key_id"],
+         "private_key": st.secrets["firebase"]["private_key"].replace('\\n', '\n'),  # Fix line breaks
+         "client_email": st.secrets["firebase"]["client_email"],
+         "client_id": st.secrets["firebase"]["client_id"],
+         "auth_uri": st.secrets["firebase"]["auth_uri"],
+         "token_uri": st.secrets["firebase"]["token_uri"],
+         "auth_provider_x509_cert_url": st.secrets["firebase"]["auth_provider_x509_cert_url"],
+         "client_x509_cert_url": st.secrets["firebase"]["client_x509_cert_url"]
+    }
+    cred = credentials.Certificate(firebase_config)
 else:
     cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
 firebase_admin.initialize_app(cred, {
