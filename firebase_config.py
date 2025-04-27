@@ -1,23 +1,19 @@
 # firebase_config.py
 import firebase_admin
-from firebase_admin import credentials, storage
-from firebase_admin import credentials, initialize_app
+from firebase_admin import credentials, storage, initialize_app
 import pyrebase
 import os
 import streamlit as st
 import json
-# Check if the app is running on Streamlit Cloud
-# if os.getenv("RUNNING_IN_STREAMLIT_CLOUD"):
-if "firebase" in st.secrets:
-    # Use credentials from Streamlit secrets (firebase section in secrets.toml)
-    cred = credentials.Certificate(st.secrets["firebase"])
-else:
-    # Fallback to a local path if running locally
-    cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
 
+# Check if the app is running on Streamlit Cloud
 if os.getenv("RUNNING_IN_STREAMLIT_CLOUD"):
-    # Initialize Firebase Admin SDK
-    initialize_app(cred, {'storageBucket': 'your-project-id.appspot.com'})
+    cred=credentials.Certificate(st.secrets["firebase"])
+else:
+    cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
+firebase_admin.initialize_app(cred, {
+    'storageBucket': 'your-project-id.appspot.com'
+})
 
 # Initialize Pyrebase (for client operations)
 firebase_config = {
