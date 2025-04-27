@@ -7,15 +7,17 @@ import os
 import streamlit as st
 import json
 # Check if the app is running on Streamlit Cloud
+# if os.getenv("RUNNING_IN_STREAMLIT_CLOUD"):
+if "firebase" in st.secrets:
+    # Use credentials from Streamlit secrets (firebase section in secrets.toml)
+    cred = credentials.Certificate(st.secrets["firebase"])
+else:
+    # Fallback to a local path if running locally
+    cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
+
 if os.getenv("RUNNING_IN_STREAMLIT_CLOUD"):
- if "firebase" in st.secrets:
-     # Use credentials from Streamlit secrets (firebase section in secrets.toml)
-     cred = credentials.Certificate(st.secrets["firebase"])
- else:
-     # Fallback to a local path if running locally
-     cred = credentials.Certificate(r"C:\Users\vedan\Downloads\travelplanner-43fb2-firebase-adminsdk-fbsvc-33bf021161.json")
- # Initialize Firebase Admin SDK
- initialize_app(cred, {'storageBucket': 'your-project-id.appspot.com'})
+    # Initialize Firebase Admin SDK
+    initialize_app(cred, {'storageBucket': 'your-project-id.appspot.com'})
 
 # Initialize Pyrebase (for client operations)
 firebase_config = {
