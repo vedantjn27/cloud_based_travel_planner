@@ -96,7 +96,7 @@ def logout():
 
 # Login/Register Page
 def show_auth_page():
-    st.title("AI Travel Planner")
+    st.title("Tripfinity✈️")
     
     # Toggle between login and register
     if 'show_login' not in st.session_state:
@@ -133,13 +133,13 @@ def show_weather_widget(city):
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
-            st.metric("Temperature", f"{weather['temperature']}°C")
+            st.metric("Temperature🌡️", f"{weather['temperature']}°C")
         with col2:
-            st.metric("Description", weather['description'])
+            st.metric("Description📝", weather['description'])
         with col3:
-            st.metric("Humidity", f"{weather['humidity']}%")
+            st.metric("Humidity🌬️", f"{weather['humidity']}%")
         with col4:
-            st.metric("Wind Speed", f"{weather['wind_speed']} m/s")
+            st.metric("Wind Speed🌪️", f"{weather['wind_speed']} m/s")
     else:
         st.warning(f"Could not fetch weather data for {city}")
 
@@ -492,7 +492,7 @@ def show_trip_details(trip_id):
     trip = trips[0]
     
     # Trip Header
-    st.title(f"Trip to {trip['destination']}")
+    st.title(f"Trip to {trip['destination']}✈️")
     st.write(f"**Date:** {trip['start_date']} to {trip['end_date']}")
     st.write(f"**Budget:** ${trip['budget']}")
     
@@ -523,7 +523,7 @@ def show_trip_details(trip_id):
             show_timeline = st.checkbox("Show Timeline View", value=True)
         
             if show_timeline:
-                st.subheader("Trip Timeline")
+                st.subheader("Trip Timeline🗓️")
                 # Create the timeline visualization
                 create_timeline_view(trip_id, itineraries)
         
@@ -535,7 +535,7 @@ def show_trip_details(trip_id):
     
     # Tab 2: Expenses
     with tab2:
-        st.subheader("Add Expense")
+        st.subheader("Add Expense💰")
         
         col1, col2, col3 = st.columns(3)
         
@@ -568,7 +568,7 @@ def show_trip_details(trip_id):
             else:
                 st.error("Please fill in all fields correctly.")
         
-        st.subheader("Expense Summary")
+        st.subheader("Expense Summary📋")
         
         expenses = get_trip_expenses(trip_id)
         summary = get_trip_expense_summary(trip_id)
@@ -600,7 +600,7 @@ def show_trip_details(trip_id):
             st.info("No expenses recorded for this trip yet.")
     
     with tab3:
-        st.subheader("Upload Travel Photo")
+        st.subheader("Upload Travel Photo📸")
     
         photo_file = st.file_uploader("Choose a photo", type=["jpg", "jpeg", "png"])
         description = st.text_input("Description")
@@ -619,7 +619,7 @@ def show_trip_details(trip_id):
             else:
                 st.error(message)
     
-        st.subheader("Travel Photos")
+        st.subheader("Trip Memories🖼️")
     
         photos = get_trip_photos(trip_id)
     
@@ -646,7 +646,7 @@ def show_trip_details(trip_id):
             
     # Tab 4: Recommendations
     with tab4:
-        st.subheader(f"Recommendations for {trip['destination']}")
+        st.subheader(f"Recommendations for {trip['destination']}💡")
         
         # Get place recommendations
         attractions = get_place_recommendations(trip['destination'], "tourist_attraction")
@@ -655,7 +655,7 @@ def show_trip_details(trip_id):
         col1, col2 = st.columns(2)
         
         with col1:
-            st.write("### Top Attractions")
+            st.write("### Top Attractions🌍")
             
             if attractions:
                 for i, place in enumerate(attractions[:5], 1):
@@ -667,7 +667,7 @@ def show_trip_details(trip_id):
                 st.info("Could not fetch attraction recommendations.")
         
         with col2:
-            st.write("### Top Restaurants")
+            st.write("### Top Restaurants🍽️")
             
             if restaurants:
                 for i, place in enumerate(restaurants[:5], 1):
@@ -679,7 +679,7 @@ def show_trip_details(trip_id):
                 st.info("Could not fetch restaurant recommendations.")
         
         # Traffic updates between key locations
-        st.subheader("Traffic Updates")
+        st.subheader("Traffic Updates🚗")
         
         origin = st.text_input("Origin", value=f"Airport, {trip['destination']}")
         destination = st.text_input("Destination", value=f"City Center, {trip['destination']}")
@@ -702,7 +702,7 @@ def show_trip_details(trip_id):
                 st.error("Could not fetch traffic updates.")
 
     with tab5:
-        st.subheader("Packing List")
+        st.subheader("Packing List🧳 ")
     
         # Import packing list functions at the top of your file
         from packing_list import (generate_packing_list, get_packing_list, 
@@ -815,7 +815,7 @@ def show_trip_details(trip_id):
 
     with tab6:
         # Add note form
-        st.subheader("Add New Journal Entry")
+        st.subheader("Add New Journal Entry📖")
 
         # Date and Mood
         col1, col2 = st.columns(2)
@@ -989,7 +989,7 @@ def show_trip_details(trip_id):
             # Display mood stats
             mood_counts = get_mood_counts(trip_id)
             if mood_counts:
-                st.subheader("Mood Summary")
+                st.subheader("Mood Summary😊")
             
                 # Create data for pie chart
                 moods = [mc['mood'] for mc in mood_counts]
